@@ -1,5 +1,5 @@
 /**
- * 进行Local数据存储管理的工具模块
+ * 进行Local数据存储管理的工具模块,localStorage兼容性问题没解决
  */
 const USER_KEY='user_key';
 export default{

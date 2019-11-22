@@ -1,10 +1,12 @@
 import React, { Component } from 'react';
 import { Form, Icon, Input, Button, message} from 'antd';
+import {Redirect} from 'react-router-dom';
 
 import './login.less';
-import logo from './images/logo.png';
+import logo from '../../assets/images/logo.png';
 import {reqLogin} from '../../api';
 import memoryUtils from '../../utils/memoryUtils';
+import storageUtils from '../../utils/storageUtils';
 
 //登录的路由组件
 class Login extends Component {
@@ -19,11 +21,14 @@ class Login extends Component {
                 const response=await reqLogin(urlstr,username,password);
                 const result=response.data;
                 console.log(result);
-                if(result.code===40001){
+                if(result.access_token){
                     //提示登陆成功
                     message.success("登陆成功");
+                    const user={id:1,username:"admin"};
                     //保存user到内存中
-                    memoryUtils.user={id:40001,username:"admin"};
+                    memoryUtils.user=user;
+                    //保存到local中去
+                    storageUtils.saveUser(user);
                     //跳转到管理界面（不需要再回退到登陆）注意push和replace的区别
                     this.props.history.replace('/');
                 }else{//登陆失败
@@ -35,6 +40,11 @@ class Login extends Component {
     }
 
     render() {
+        //如果用户已经登陆，自动跳转到管理界面
+        const user=memoryUtils.user;
+        if(user&&user.id){
+            return <Redirect to='/'></Redirect>
+        }
         const {getFieldDecorator}=this.props.form;
         return (
             <div className='login'>
