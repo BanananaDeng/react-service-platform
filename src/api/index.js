@@ -7,8 +7,8 @@
  import ajax from './ajax';
 
  //登陆
- export const reqLogin=(url,username,password)=>ajax(
-     url, 
+ export const reqLogin=(username,password)=>ajax(
+    `http://47.101.141.240:8762/auth/oauth/token?grant_type=password&username=${username}&password=${password}`, 
      {},
      {
         headers:{

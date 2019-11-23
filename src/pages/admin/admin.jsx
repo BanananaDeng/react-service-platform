@@ -28,7 +28,7 @@ class Admin extends Component {
                 </Sider>
                 <Layout>
                     <Header>Header哇哇</Header>
-                    <Content style={{margin:'20px', backgroundColor:'#fff'}}>
+                    <Content style={{margin:'10px', backgroundColor:'#fff'}}>
                         <Switch>
                             <Route path='/home' component={Home}></Route>
                             <Route path='/product' component={Product}></Route>

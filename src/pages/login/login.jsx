@@ -17,8 +17,7 @@ class Login extends Component {
         this.props.form.validateFields(async (err, values) => {
             const {username,password}=values;
             if (!err) {
-                let urlstr='http://47.101.141.240:8762/auth/oauth/token?grant_type=password&username='+username+'&password='+password;
-                const response=await reqLogin(urlstr,username,password);
+                const response=await reqLogin(username,password);
                 const result=response.data;
                 console.log(result);
                 if(result.access_token){
